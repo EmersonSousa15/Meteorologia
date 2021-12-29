@@ -86,5 +86,17 @@ const sendDataRender = (arrDataApi) => {
     }
     calcDates()
     
+    if(window.Notification&&window.Notification.permission!=="denied"){
+        Notification.requestPermission(status =>{
+            let title = dataNecessary.currentClimate.description.charAt(0).toUpperCase() + dataNecessary.currentClimate.description.slice(1)
+            console.log(status);
+            let not = new Notification(title,{
+                body: `Temperatura atual: ${dataNecessary.currentClimate.temp}`,
+                icon: dataNecessary.currentClimate.icon
+            })
+        })
+    }
+
+
     render(dataNecessary)    
 }

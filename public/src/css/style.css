@@ -34,6 +34,9 @@ main .informations-today{
 main .informations-today, .informations-week{
     padding: 1rem;
 }
+#name-day, .text-temper, #name-city, #day, #text-climate{
+    font-size: 1.2rem;
+}
 .informations-today .city-date{
     display: flex;
     margin-bottom: .8rem;
@@ -90,8 +93,8 @@ main .informations-today, .informations-week{
     justify-content: space-between;
 }
 #week .day-week{
-    display: flex;
     margin: 1rem;
+    display: flex;
     align-items: center;
     flex-direction: column;
 }
