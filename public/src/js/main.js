@@ -1,15 +1,23 @@
 import {requiredDataApi} from "./perm.js";
 import { render } from "./render.js";
 
+let teste = 0
+
 const getPosition = async (pos) => {
-    const dataApi = await requiredDataApi(pos)
-    const data = await sendDataRender(dataApi)
+    if(pos.code){
+        alert("Permita o acesso a localização para ver a informações da sua cidade")
+        location.reload
+    }else{
+        const dataApi = await requiredDataApi(pos)
+        const data = await sendDataRender(dataApi)
+    }
 }
-navigator.geolocation.getCurrentPosition(getPosition)  
+
+navigator.geolocation.getCurrentPosition(getPosition, getPosition)        
 
 setInterval(() => {
     navigator.geolocation.getCurrentPosition(getPosition)        
-},30000);
+},30000)
 
 const sendDataRender = (arrDataApi) => {
 
