@@ -1,8 +1,6 @@
 import {requiredDataApi} from "./perm.js";
 import { render } from "./render.js";
 
-let teste = 0
-
 const getPosition = async (pos) => {
     if(pos.code){
         alert("Permita o acesso a localização para ver a informações da sua cidade")
@@ -19,9 +17,9 @@ setInterval(() => {
     navigator.geolocation.getCurrentPosition(getPosition)        
 },30000)
 
-const sendDataRender = (arrDataApi) => {
+let dataNecessary = {}
 
-    let dataNecessary = {}
+const sendDataRender = (arrDataApi) => {
 
     const location = (city) => {
         dataNecessary.nameCity = city
@@ -85,7 +83,9 @@ const sendDataRender = (arrDataApi) => {
         }
     }
     calcDates()
-    
+    render(dataNecessary)    
+}
+
     if(window.Notification&&window.Notification.permission!=="denied"){
         Notification.requestPermission(status =>{
             let title = dataNecessary.currentClimate.description.charAt(0).toUpperCase() + dataNecessary.currentClimate.description.slice(1)
@@ -96,7 +96,3 @@ const sendDataRender = (arrDataApi) => {
             })
         })
     }
-
-
-    render(dataNecessary)    
-}
