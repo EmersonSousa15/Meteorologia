@@ -4,7 +4,6 @@ import { render } from "./render.js";
 const getPosition = async (pos) => {
     if(pos.code){
         alert("Permita o acesso a localização para ver a informações da sua cidade")
-        location.reload
     }else{
         const dataApi = await requiredDataApi(pos)
         const data = await sendDataRender(dataApi)
@@ -67,7 +66,7 @@ const sendDataRender = (arrDataApi) => {
     const calcDates = () => {
         const date = new Date()
         const daysWeek = ["Domingo", "Segunda", "Terça",
-        "Quarta", "Quinta", "Sexta", "Sabádo"]
+        "Quarta", "Quinta", "Sexta", "Sábado"]
         
         const addZero = (num) => {
         return num < 10 ? `0${num}` : num;
@@ -76,23 +75,12 @@ const sendDataRender = (arrDataApi) => {
         dataNecessary.time = {
             minutes: addZero(date.getMinutes()),
             hours: addZero(date.getHours()),
-            day: date.getDate(),
+            day: addZero(date.getDate()),
             dayWeek: daysWeek[date.getDay()],
-            month: date.getMonth()+1,
+            month: addZero(date.getMonth()+1),
             year: date.getFullYear()
         }
     }
     calcDates()
     render(dataNecessary)    
 }
-
-    if(window.Notification&&window.Notification.permission!=="denied"){
-        Notification.requestPermission(status =>{
-            let title = dataNecessary.currentClimate.description.charAt(0).toUpperCase() + dataNecessary.currentClimate.description.slice(1)
-            console.log(status);
-            let not = new Notification(title,{
-                body: `Temperatura atual: ${dataNecessary.currentClimate.temp}`,
-                icon: dataNecessary.currentClimate.icon
-            })
-        })
-    }
